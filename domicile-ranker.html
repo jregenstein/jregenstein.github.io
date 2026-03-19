@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domicile Ranking Tool</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .weight-control {
+            margin: 15px 0;
+            display: grid;
+            grid-template-columns: 200px 1fr 60px;
+            gap: 15px;
+            align-items: center;
+        }
+        .weight-control label {
+            font-weight: 600;
+            color: #555;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+        .weight-value {
+            text-align: right;
+            font-weight: bold;
+            color: #007AFF;
+        }
+        table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th {
+            background-color: #007AFF;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .rank {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #007AFF;
+        }
+        .score {
+            font-weight: 600;
+        }
+        .top-choice {
+            background-color: #E3F2FF;
+        }
+        .note {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.95em;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #007AFF;
+        }
+        .output-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .output-section h2 {
+            margin-top: 0;
+        }
+        #bid-string {
+            width: 100%;
+            padding: 12px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 1.1em;
+            border: 2px solid #007AFF;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            color: #333;
+            box-sizing: border-box;
+        }
+        #bid-string:focus {
+            outline: none;
+            background-color: #fff;
+        }
+        .copy-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007AFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+        .copy-button:active {
+            background-color: #004494;
+        }
+        .copied-message {
+            display: inline-block;
+            margin-left: 10px;
+            color: #34C759;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .copied-message.show {
+            opacity: 1;
+        }
+        select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+            width: 100%;
+            max-width: 300px;
+        }
+        select:focus {
+            outline: none;
+            border-color: #007AFF;
+        }
+        .home-base-control {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            border: 2px solid #007AFF;
+        }
+        .home-base-control label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .file-upload-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 2px dashed #007AFF;
+        }
+        .file-upload-section h2 {
+            margin-top: 0;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .file-label {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007AFF;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .file-label:hover {
+            background-color: #0056b3;
+        }
+        .file-info {
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .loading {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #FFF3CD;
+            border-radius: 4px;
+            border-left: 4px solid #FFC107;
+        }
+        .loading.show {
+            display: block;
+        }
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(0,0,0,.1);
+            border-radius: 50%;
+            border-top-color: #007AFF;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .status.success {
+            background-color: #D4EDDA;
+            color: #155724;
+        }
+        .status.error {
+            background-color: #F8D7DA;
+            color: #721C24;
+        }
+        .hidden {
+            display: none;
+        }
+        .info-box {
+            background-color: #E3F2FF;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            border-left: 4px solid #007AFF;
+        }
+        .info-box p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>✈️ Domicile Ranking Tool <span style="font-size: 0.5em; color: #999;">v5.2</span></h1>
+    <p style="text-align: center; color: #666; font-size: 0.9em; margin-top: -10px;">
+        Client-side processing of BTS flight data with 1-stop connection awareness
+    </p>
+
+    <div class="file-upload-section" id="loading-section">
+        <h2 id="upload-heading">Loading Flight Data...</h2>
+        <div class="loading show" id="loading">
+            <span class="spinner"></span>
+            <span id="loading-text">Fetching flight data from BTS database...</span>
+        </div>
+        <div class="status hidden" id="status"></div>
+        
+        <div id="manual-upload" class="hidden" style="margin-top: 20px;">
+            <p style="margin-bottom: 15px;">Please select the BTS CSV file from your local directory:</p>
+            <label for="csv-file" class="file-label">Choose CSV File</label>
+            <input type="file" id="csv-file" accept=".csv">
+            <div class="file-info" id="file-info"></div>
+        </div>
+    </div>
+    
+    <div id="main-app" class="hidden">
+        <div class="controls">
+            <div class="home-base-control">
+                <label for="home-base">Your Home Base Airport:</label>
+                <select id="home-base">
+                    <option value="SFO" selected>SFO - San Francisco</option>
+                    <option value="LAX">LAX - Los Angeles</option>
+                    <option value="SAN">SAN - San Diego</option>
+                    <option value="SEA">SEA - Seattle</option>
+                    <option value="PDX">PDX - Portland</option>
+                    <option value="DEN">DEN - Denver</option>
+                    <option value="ORD">ORD - Chicago O'Hare</option>
+                    <option value="MSP">MSP - Minneapolis</option>
+                    <option value="PHX">PHX - Phoenix</option>
+                    <option value="SLC">SLC - Salt Lake City</option>
+                    <option value="BOI">BOI - Boise</option>
+                    <option value="AUS">AUS - Austin</option>
+                    <option value="IAH">IAH - Houston</option>
+                    <option value="ATL">ATL - Atlanta</option>
+                    <option value="JFK">JFK - New York JFK</option>
+                    <option value="LGA">LGA - New York LaGuardia</option>
+                    <option value="EWR">EWR - Newark</option>
+                    <option value="BOS">BOS - Boston</option>
+                    <option value="DCA">DCA - Washington Reagan</option>
+                    <option value="IAD">IAD - Washington Dulles</option>
+                    <option value="MIA">MIA - Miami</option>
+                    <option value="MCO">MCO - Orlando</option>
+                    <option value="FLL">FLL - Fort Lauderdale</option>
+                    <option value="TPA">TPA - Tampa</option>
+                    <option value="DFW">DFW - Dallas Fort Worth</option>
+                    <option value="PHL">PHL - Philadelphia</option>
+                    <option value="CLT">CLT - Charlotte</option>
+                    <option value="DTW">DTW - Detroit</option>
+                    <option value="LAS">LAS - Las Vegas</option>
+                    <option value="BNA">BNA - Nashville</option>
+                    <option value="RDU">RDU - Raleigh-Durham</option>
+                    <option value="PVD">PVD - Providence</option>
+                    <option value="BDL">BDL - Hartford</option>
+                    <option value="BUF">BUF - Buffalo</option>
+                    <option value="PIT">PIT - Pittsburgh</option>
+                    <option value="MKE">MKE - Milwaukee</option>
+                    <option value="IND">IND - Indianapolis</option>
+                    <option value="CMH">CMH - Columbus</option>
+                    <option value="STL">STL - St. Louis</option>
+                    <option value="MCI">MCI - Kansas City</option>
+                </select>
+            </div>
+            
+            <h2>Step 2: Adjust Factor Weights</h2>
+            <p class="note">Move the sliders to adjust how important each factor is to you. Edit all scores in the table below. Rankings update automatically. (All scores: 10=best, 1=worst)</p>
+            
+            <div class="weight-control">
+                <label for="commute">Commute Ease:</label>
+                <input type="range" id="commute" min="0" max="10" value="8" step="0.5">
+                <span class="weight-value" id="commute-value">8</span>
+            </div>
+            
+            <div class="weight-control">
+                <label for="friends">Social Connections:</label>
+                <input type="range" id="friends" min="0" max="10" value="6" step="0.5">
+                <span class="weight-value" id="friends-value">6</span>
+            </div>
+            
+            <div class="weight-control">
+                <label for="lgbtq">LGBTQ+ Safety:</label>
+                <input type="range" id="lgbtq" min="0" max="10" value="9" step="0.5">
+                <span class="weight-value" id="lgbtq-value">9</span>
+            </div>
+            
+            <div class="weight-control">
+                <label for="home">Home Base Bonus:</label>
+                <input type="range" id="home" min="0" max="10" value="10" step="0.5">
+                <span class="weight-value" id="home-value">10</span>
+            </div>
+            
+            <div class="weight-control">
+                <label for="cost">Cost of Living:</label>
+                <input type="range" id="cost" min="0" max="10" value="5" step="0.5">
+                <span class="weight-value" id="cost-value">5</span>
+            </div>
+        </div>
+        
+        <div class="output-section">
+            <h2>Your Bid Order</h2>
+            <input type="text" id="bid-string" readonly value="">
+            <button class="copy-button" onclick="copyBidString()">Copy to Clipboard</button>
+            <span class="copied-message" id="copied-message">Copied!</span>
+        </div>
+        
+        <details style="margin: 20px 0; background: white; padding: 15px; border-radius: 8px;">
+            <summary style="cursor: pointer; color: #666; font-weight: 600;">Debug: Show Commute Scores from Your Home Base</summary>
+            <div id="debug-commute" style="margin-top: 15px; font-family: monospace; font-size: 0.9em; line-height: 1.6;"></div>
+        </details>
+        
+        <table id="rankings">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Code</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Commute</th>
+                    <th>Friends (0-10)</th>
+                    <th>LGBTQ+ (0-10)</th>
+                    <th>Cost (0-10)</th>
+                    <th>Total Score</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody id="results">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const DOMICILES = ['ATL', 'AUS', 'BOI', 'DEN', 'IAH', 'LAX', 'MSP', 'ORD', 'PDX', 'PHX', 'SAN', 'SEA', 'SFO', 'SLC'];
+        const MAJOR_HUBS = ['ATL', 'DEN', 'ORD', 'DFW', 'LAX', 'SFO', 'SEA', 'PHX', 'IAH', 'EWR', 'CLT', 'DTW', 'MSP'];
+        
+        const AIRPORT_COORDS = {
+            'ATL': [33.6407, -84.4277], 'AUS': [30.1945, -97.6699], 'BOI': [43.5644, -116.2228],
+            'DEN': [39.8561, -104.6737], 'IAH': [29.9902, -95.3368], 'LAX': [33.9416, -118.4085],
+            'MSP': [44.8820, -93.2218], 'ORD': [41.9742, -87.9073], 'PDX': [45.5887, -122.5975],
+            'PHX': [33.4342, -112.0116], 'SAN': [32.7338, -117.1933], 'SEA': [47.4502, -122.3088],
+            'SFO': [37.6213, -122.3790], 'SLC': [40.7899, -111.9791], 'JFK': [40.6413, -73.7781],
+            'LGA': [40.7769, -73.8740], 'EWR': [40.6895, -74.1745], 'BOS': [42.3656, -71.0096],
+            'DCA': [38.8521, -77.0377], 'IAD': [38.9531, -77.4565], 'MIA': [25.7959, -80.2870],
+            'MCO': [28.4312, -81.3081], 'FLL': [26.0742, -80.1506], 'TPA': [27.9755, -82.5332],
+            'DFW': [32.8998, -97.0403], 'PHL': [39.8744, -75.2424], 'CLT': [35.2144, -80.9473],
+            'DTW': [42.2162, -83.3554], 'LAS': [36.0840, -115.1537], 'BNA': [36.1263, -86.6774],
+            'RDU': [35.8776, -78.7875], 'PVD': [41.7240, -71.4281], 'BDL': [41.9389, -72.6832],
+            'BUF': [42.9405, -78.7322], 'PIT': [40.4915, -80.2329], 'MKE': [42.9472, -87.8965],
+            'IND': [39.7173, -86.2944], 'CMH': [39.9980, -82.8919], 'STL': [38.7487, -90.3700],
+            'MCI': [39.2976, -94.7139]
+        };
+        
+        let flightRoutes = {};
+        let flightConnectivity = {};
+        
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 3959;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+        
+        const domiciles = [
+            { code: 'SFO', city: 'San Francisco', state: 'California', friends: 0, lgbtq: 10, cost: 1 },
+            { code: 'LAX', city: 'Los Angeles', state: 'California', friends: 8, lgbtq: 10, cost: 2 },
+            { code: 'SAN', city: 'San Diego', state: 'California', friends: 0, lgbtq: 10, cost: 3 },
+            { code: 'SEA', city: 'Seattle', state: 'Washington', friends: 8, lgbtq: 9, cost: 4 },
+            { code: 'PDX', city: 'Portland', state: 'Oregon', friends: 5, lgbtq: 9, cost: 6 },
+            { code: 'DEN', city: 'Denver', state: 'Colorado', friends: 8, lgbtq: 7, cost: 7 },
+            { code: 'ORD', city: 'Chicago', state: 'Illinois', friends: 8, lgbtq: 8, cost: 5 },
+            { code: 'MSP', city: 'Minneapolis', state: 'Minnesota', friends: 8, lgbtq: 7, cost: 7 },
+            { code: 'PHX', city: 'Phoenix', state: 'Arizona', friends: 0, lgbtq: 4, cost: 8 },
+            { code: 'SLC', city: 'Salt Lake City', state: 'Utah', friends: 0, lgbtq: 3, cost: 8 },
+            { code: 'BOI', city: 'Boise', state: 'Idaho', friends: 0, lgbtq: 2, cost: 9 },
+            { code: 'AUS', city: 'Austin', state: 'Texas', friends: 0, lgbtq: 2, cost: 6 },
+            { code: 'IAH', city: 'Houston', state: 'Texas', friends: 0, lgbtq: 2, cost: 7 },
+            { code: 'ATL', city: 'Atlanta', state: 'Georgia', friends: 0, lgbtq: 3, cost: 8 }
+        ];
+
+        function parseCSV(text) {
+            const lines = text.split('\n');
+            const headers = lines[0].split(',');
+            const data = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                if (!lines[i].trim()) continue;
+                const values = lines[i].split(',');
+                const row = {};
+                headers.forEach((header, index) => {
+                    row[header.trim()] = values[index] ? values[index].trim() : '';
+                });
+                data.push(row);
+            }
+            
+            return data;
+        }
+
+        function scoreDirectFlights(departures) {
+            if (departures >= 1000) return 10;
+            if (departures >= 500) return 9;
+            if (departures >= 250) return 8;
+            if (departures >= 100) return 7;
+            if (departures >= 50) return 6;
+            if (departures >= 25) return 5;
+            if (departures >= 10) return 4;
+            return null;
+        }
+
+        function findBestConnection(origin, dest) {
+            let bestScore = 0;
+            
+            for (const hub of MAJOR_HUBS) {
+                if (hub === origin || hub === dest) continue;
+                
+                const leg1 = flightRoutes[`${origin}-${hub}`] || 0;
+                const leg2 = flightRoutes[`${hub}-${dest}`] || 0;
+                
+                if (leg1 > 0 && leg2 > 0) {
+                    const minFreq = Math.min(leg1, leg2);
+                    let connectionScore;
+                    
+                    if (minFreq >= 100) {
+                        connectionScore = 4;
+                    } else if (minFreq >= 50) {
+                        connectionScore = 3;
+                    } else {
+                        connectionScore = 2;
+                    }
+                    
+                    bestScore = Math.max(bestScore, connectionScore);
+                }
+            }
+            
+            return bestScore > 0 ? bestScore : 2;
+        }
+
+        function processFlightData(csvData) {
+            document.getElementById('loading-text').textContent = 'Processing CSV data...';
+            
+            flightRoutes = {};
+            
+            csvData.forEach(row => {
+                const origin = row.ORIGIN;
+                const dest = row.DEST;
+                const departures = parseInt(parseFloat(row.DEPARTURES_PERFORMED || 0));
+                
+                if (origin && dest && !isNaN(departures)) {
+                    const key = `${origin}-${dest}`;
+                    flightRoutes[key] = (flightRoutes[key] || 0) + departures;
+                }
+            });
+            
+            document.getElementById('loading-text').textContent = 'Calculating connectivity scores...';
+            
+            setTimeout(() => {
+                const homeBaseSelect = document.getElementById('home-base');
+                const allAirports = Array.from(homeBaseSelect.options).map(opt => opt.value);
+                
+                flightConnectivity = {};
+                
+                allAirports.forEach(homeBase => {
+                    flightConnectivity[homeBase] = {};
+                    
+                    DOMICILES.forEach(domicile => {
+                        if (homeBase === domicile) {
+                            flightConnectivity[homeBase][domicile] = 10;
+                        } else {
+                            const key = `${homeBase}-${domicile}`;
+                            const departures = flightRoutes[key] || 0;
+                            let score = scoreDirectFlights(departures);
+                            
+                            if (score === null) {
+                                score = findBestConnection(homeBase, domicile);
+                            }
+                            
+                            flightConnectivity[homeBase][domicile] = score;
+                        }
+                    });
+                });
+                
+                const routeCount = Object.keys(flightRoutes).length;
+                document.getElementById('loading').classList.remove('show');
+                document.getElementById('status').className = 'status success';
+                document.getElementById('status').textContent = `✓ Loaded ${routeCount} routes from BTS data`;
+                document.getElementById('main-app').classList.remove('hidden');
+                
+                setTimeout(() => {
+                    document.getElementById('loading-section').style.display = 'none';
+                }, 2000);
+                
+                calculateScores();
+            }, 50);
+        }
+
+        async function loadDefaultData() {
+            try {
+                document.getElementById('loading-text').textContent = 'Fetching flight data...';
+                const response = await fetch('flight_data_filtered.csv');
+                
+                if (!response.ok) {
+                    throw new Error('fetch_failed');
+                }
+                
+                document.getElementById('loading-text').textContent = 'Parsing CSV data...';
+                const text = await response.text();
+                const csvData = parseCSV(text);
+                processFlightData(csvData);
+                
+            } catch (error) {
+                document.getElementById('loading').classList.remove('show');
+                document.getElementById('upload-heading').textContent = 'Load Flight Data';
+                
+                if (error.message === 'fetch_failed' || error.name === 'TypeError') {
+                    document.getElementById('status').className = 'status';
+                    document.getElementById('status').style.backgroundColor = '#E3F2FF';
+                    document.getElementById('status').style.color = '#004085';
+                    document.getElementById('status').textContent = '📁 Local mode: Please select T_T100D_SEGMENT_US_CARRIER_ONLY.csv from your directory';
+                } else {
+                    document.getElementById('status').className = 'status error';
+                    document.getElementById('status').textContent = `⚠️ Error: ${error.message}`;
+                }
+                
+                document.getElementById('manual-upload').classList.remove('hidden');
+            }
+        }
+        
+        document.getElementById('csv-file').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            document.getElementById('file-info').textContent = `Selected: ${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB)`;
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('status').classList.add('hidden');
+            
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const csvData = parseCSV(event.target.result);
+                    processFlightData(csvData);
+                } catch (error) {
+                    document.getElementById('loading').classList.remove('show');
+                    document.getElementById('status').className = 'status error';
+                    document.getElementById('status').textContent = `Error: ${error.message}`;
+                }
+            };
+            reader.readAsText(file);
+        });
+        
+        // Auto-load data on page load
+        window.addEventListener('DOMContentLoaded', loadDefaultData);
+
+        function getCommuteScore(homeBase, domicileCode, domicileObj) {
+            if (domicileObj.commuteOverride && domicileObj.commuteOverride[homeBase] !== undefined) {
+                return domicileObj.commuteOverride[homeBase];
+            }
+            if (flightConnectivity[homeBase] && flightConnectivity[homeBase][domicileCode] !== undefined) {
+                return flightConnectivity[homeBase][domicileCode];
+            }
+            return 5;
+        }
+        
+        function calculateScores() {
+            const weights = {
+                commute: parseFloat(document.getElementById('commute').value),
+                friends: parseFloat(document.getElementById('friends').value),
+                lgbtq: parseFloat(document.getElementById('lgbtq').value),
+                home: parseFloat(document.getElementById('home').value),
+                cost: parseFloat(document.getElementById('cost').value)
+            };
+            
+            const homeBase = document.getElementById('home-base').value;
+
+            document.getElementById('commute-value').textContent = weights.commute;
+            document.getElementById('friends-value').textContent = weights.friends;
+            document.getElementById('lgbtq-value').textContent = weights.lgbtq;
+            document.getElementById('home-value').textContent = weights.home;
+            document.getElementById('cost-value').textContent = weights.cost;
+
+            const scored = domiciles.map(d => {
+                const commuteScore = getCommuteScore(homeBase, d.code, d);
+                const isHomeBase = (homeBase === d.code);
+                
+                const homeCoords = AIRPORT_COORDS[homeBase];
+                const domicileCoords = AIRPORT_COORDS[d.code];
+                const distance = (homeCoords && domicileCoords) 
+                    ? calculateDistance(homeCoords[0], homeCoords[1], domicileCoords[0], domicileCoords[1])
+                    : 9999;
+                
+                const routeKey = `${homeBase}-${d.code}`;
+                const departures = flightRoutes[routeKey] || 0;
+                const flightsPerDay = departures / 365;
+                
+                let score = 
+                    (commuteScore * weights.commute) +
+                    (d.friends * weights.friends) +
+                    (d.lgbtq * weights.lgbtq) +
+                    (d.cost * weights.cost);
+                
+                if (isHomeBase) {
+                    score += (10 * weights.home);
+                }
+
+                return {
+                    ...d,
+                    commuteScore: commuteScore,
+                    isHomeBase: isHomeBase,
+                    totalScore: score,
+                    distance: distance,
+                    flightsPerDay: flightsPerDay,
+                    directFlights: departures
+                };
+            });
+
+            scored.sort((a, b) => {
+                if (Math.abs(b.totalScore - a.totalScore) < 0.01) {
+                    return a.distance - b.distance;
+                }
+                return b.totalScore - a.totalScore;
+            });
+
+            const tbody = document.getElementById('results');
+            tbody.innerHTML = '';
+
+            scored.forEach((d, index) => {
+                const row = document.createElement('tr');
+                if (index === 0) {
+                    row.classList.add('top-choice');
+                }
+                
+                let commuteDisplay = '';
+                let commuteDetails = '';
+                
+                if (d.isHomeBase) {
+                    commuteDisplay = '<strong style="color: #007AFF;">HOME BASE</strong>';
+                    commuteDetails = 'Your current base';
+                } else if (d.directFlights > 0) {
+                    const flightInfo = d.flightsPerDay >= 1 
+                        ? `${d.flightsPerDay.toFixed(1)}/day` 
+                        : `${d.directFlights}/year`;
+                    commuteDisplay = `<strong>${flightInfo}</strong><br>${Math.round(d.distance)} mi<br><small style="color: #888;">Score: ${d.commuteScore}/10</small>`;
+                    commuteDetails = `${d.directFlights} direct flights annually`;
+                } else {
+                    commuteDisplay = `<strong>1-stop</strong><br>${Math.round(d.distance)} mi<br><small style="color: #888;">Score: ${d.commuteScore}/10</small>`;
+                    commuteDetails = `No direct service`;
+                }
+                
+                row.innerHTML = `
+                    <td class="rank">${index + 1}</td>
+                    <td><strong>${d.code}</strong></td>
+                    <td>${d.city}</td>
+                    <td>${d.state}</td>
+                    <td>${commuteDisplay}</td>
+                    <td>
+                        <input type="number" 
+                               min="0" 
+                               max="10" 
+                               step="0.5" 
+                               value="${d.friends}" 
+                               data-code="${d.code}"
+                               data-field="friends"
+                               class="field-input">
+                    </td>
+                    <td>
+                        <input type="number" 
+                               min="0" 
+                               max="10" 
+                               step="0.5" 
+                               value="${d.lgbtq}" 
+                               data-code="${d.code}"
+                               data-field="lgbtq"
+                               class="field-input">
+                    </td>
+                    <td>
+                        <input type="number" 
+                               min="0" 
+                               max="10" 
+                               step="0.5" 
+                               value="${d.cost}" 
+                               data-code="${d.code}"
+                               data-field="cost"
+                               class="field-input">
+                    </td>
+                    <td class="score">${d.totalScore.toFixed(1)}</td>
+                    <td class="note">${commuteDetails}</td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            document.querySelectorAll('.field-input').forEach(input => {
+                input.addEventListener('input', (e) => {
+                    const code = e.target.dataset.code;
+                    const field = e.target.dataset.field;
+                    const value = parseFloat(e.target.value) || 0;
+                    const domicile = domiciles.find(d => d.code === code);
+                    if (domicile) {
+                        if (field === 'commute') {
+                            if (!domicile.commuteOverride) {
+                                domicile.commuteOverride = {};
+                            }
+                            domicile.commuteOverride[homeBase] = value;
+                        } else {
+                            domicile[field] = value;
+                        }
+                        calculateScores();
+                    }
+                });
+            });
+            
+            const bidString = scored.map(d => d.code).join(';');
+            document.getElementById('bid-string').value = bidString;
+            
+            // Debug: Show commute scores
+            const debugDiv = document.getElementById('debug-commute');
+            if (debugDiv) {
+                const totalRoutes = Object.keys(flightRoutes || {}).length;
+                const connectivityKeys = Object.keys(flightConnectivity || {}).length;
+                
+                let debugHtml = `<strong>Data Status:</strong><br>`;
+                debugHtml += `- Total routes loaded: ${totalRoutes}<br>`;
+                debugHtml += `- Home bases with connectivity data: ${connectivityKeys}<br><br>`;
+                
+                if (!flightConnectivity || connectivityKeys === 0) {
+                    debugHtml += '<span style="color: red; font-weight: bold;">⚠️ NO FLIGHT DATA LOADED!</span><br>';
+                    debugHtml += 'Scores are using fallback value (5/10). Please upload the CSV file.';
+                } else {
+                    debugHtml += `<strong>Commute Scores from ${homeBase}:</strong><br><br>`;
+                    scored.forEach(d => {
+                        const routeKey = `${homeBase}-${d.code}`;
+                        const departures = flightRoutes[routeKey] || 0;
+                        
+                        let info = '';
+                        if (d.isHomeBase) {
+                            info = 'HOME BASE';
+                        } else if (departures > 0) {
+                            info = `${departures} direct flights/year, ${Math.round(d.distance)} mi`;
+                        } else {
+                            const connectionScore = findBestConnection(homeBase, d.code);
+                            if (connectionScore >= 3) {
+                                info = `No direct - best connection: ${connectionScore}/10, ${Math.round(d.distance)} mi`;
+                            } else {
+                                info = `No direct - poor connections, ${Math.round(d.distance)} mi`;
+                            }
+                        }
+                        
+                        debugHtml += `${d.code}: ${d.commuteScore}/10 - ${info}<br>`;
+                    });
+                }
+                debugDiv.innerHTML = debugHtml;
+            }
+        }
+        
+        function copyBidString() {
+            const bidStringInput = document.getElementById('bid-string');
+            bidStringInput.select();
+            bidStringInput.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(bidStringInput.value);
+            
+            const copiedMessage = document.getElementById('copied-message');
+            copiedMessage.classList.add('show');
+            setTimeout(() => {
+                copiedMessage.classList.remove('show');
+            }, 2000);
+        }
+
+        document.getElementById('home-base').addEventListener('change', calculateScores);
+        document.getElementById('commute').addEventListener('input', calculateScores);
+        document.getElementById('friends').addEventListener('input', calculateScores);
+        document.getElementById('lgbtq').addEventListener('input', calculateScores);
+        document.getElementById('home').addEventListener('input', calculateScores);
+        document.getElementById('cost').addEventListener('input', calculateScores);
+    </script>
+</body>
+</html>
