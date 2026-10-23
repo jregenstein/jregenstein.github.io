@@ -5,108 +5,13 @@
   },
   "days": [
     {
-      "busy": [],
-      "date": "2026-09-29",
-      "reserve": false
-    },
-    {
       "busy": [
         {
           "end": "19:00",
-          "start": "14:30"
+          "start": "07:00"
         }
       ],
-      "date": "2026-09-30",
-      "reserve": false
-    },
-    {
-      "busy": [
-        {
-          "end": "19:00",
-          "start": "16:00"
-        }
-      ],
-      "date": "2026-10-01",
-      "reserve": true
-    },
-    {
-      "busy": [
-        {
-          "end": "19:00",
-          "start": "18:00"
-        }
-      ],
-      "date": "2026-10-02",
-      "reserve": true
-    },
-    {
-      "busy": [
-        {
-          "end": "16:00",
-          "start": "13:00"
-        }
-      ],
-      "date": "2026-10-03",
-      "reserve": true
-    },
-    {
-      "busy": [
-        {
-          "end": "19:00",
-          "start": "16:30"
-        }
-      ],
-      "date": "2026-10-04",
-      "reserve": true
-    },
-    {
-      "busy": [],
-      "date": "2026-10-05",
-      "reserve": true
-    },
-    {
-      "busy": [
-        {
-          "end": "19:00",
-          "start": "16:00"
-        }
-      ],
-      "date": "2026-10-06",
-      "reserve": false
-    },
-    {
-      "busy": [
-        {
-          "end": "19:00",
-          "start": "18:30"
-        }
-      ],
-      "date": "2026-10-07",
-      "reserve": false
-    },
-    {
-      "busy": [],
-      "date": "2026-10-08",
-      "reserve": false
-    },
-    {
-      "busy": [
-        {
-          "end": "19:00",
-          "start": "18:00"
-        }
-      ],
-      "date": "2026-10-09",
-      "reserve": false
-    },
-    {
-      "busy": [],
-      "date": "2026-10-10",
-      "reserve": false
-    },
-    {
-      "busy": [],
-      "date": "2026-10-11",
+      "date": "2026-10-23",
       "reserve": false
     },
     {
@@ -116,7 +21,27 @@
           "start": "07:00"
         }
       ],
-      "date": "2026-10-12",
+      "date": "2026-10-24",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "18:00",
+          "start": "07:00"
+        }
+      ],
+      "date": "2026-10-25",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "08:30"
+        }
+      ],
+      "date": "2026-10-26",
       "reserve": false
     },
     {
@@ -126,22 +51,26 @@
           "start": "16:00"
         }
       ],
-      "date": "2026-10-13",
-      "reserve": true
+      "date": "2026-10-27",
+      "reserve": false
     },
     {
       "busy": [
+        {
+          "end": "15:30",
+          "start": "12:30"
+        },
         {
           "end": "19:00",
           "start": "18:30"
         }
       ],
-      "date": "2026-10-14",
+      "date": "2026-10-28",
       "reserve": true
     },
     {
       "busy": [],
-      "date": "2026-10-15",
+      "date": "2026-10-29",
       "reserve": true
     },
     {
@@ -151,13 +80,13 @@
           "start": "18:00"
         }
       ],
-      "date": "2026-10-16",
+      "date": "2026-10-30",
       "reserve": true
     },
     {
       "busy": [],
-      "date": "2026-10-17",
-      "reserve": true
+      "date": "2026-10-31",
+      "reserve": false
     },
     {
       "busy": [
@@ -166,12 +95,77 @@
           "start": "16:30"
         }
       ],
-      "date": "2026-10-18",
+      "date": "2026-11-01",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "07:00"
+        }
+      ],
+      "date": "2026-11-02",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "07:00"
+        }
+      ],
+      "date": "2026-11-03",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "07:00"
+        }
+      ],
+      "date": "2026-11-04",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "14:33",
+          "start": "07:00"
+        }
+      ],
+      "date": "2026-11-05",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "18:00"
+        }
+      ],
+      "date": "2026-11-06",
       "reserve": false
     },
     {
       "busy": [],
-      "date": "2026-10-19",
+      "date": "2026-11-07",
+      "reserve": false
+    },
+    {
+      "busy": [],
+      "date": "2026-11-08",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "18:00"
+        }
+      ],
+      "date": "2026-11-09",
       "reserve": false
     },
     {
@@ -181,56 +175,96 @@
           "start": "16:00"
         }
       ],
-      "date": "2026-10-20",
+      "date": "2026-11-10",
       "reserve": false
     },
     {
       "busy": [
         {
           "end": "19:00",
-          "start": "18:30"
+          "start": "07:00"
         }
       ],
-      "date": "2026-10-21",
-      "reserve": true
-    },
-    {
-      "busy": [],
-      "date": "2026-10-22",
-      "reserve": true
+      "date": "2026-11-11",
+      "reserve": false
     },
     {
       "busy": [
         {
           "end": "19:00",
-          "start": "18:00"
+          "start": "07:00"
         }
       ],
-      "date": "2026-10-23",
-      "reserve": true
-    },
-    {
-      "busy": [],
-      "date": "2026-10-24",
-      "reserve": true
+      "date": "2026-11-12",
+      "reserve": false
     },
     {
       "busy": [
         {
-          "end": "16:30",
-          "start": "11:00"
+          "end": "19:00",
+          "start": "07:00"
         }
       ],
-      "date": "2026-10-25",
-      "reserve": true
+      "date": "2026-11-13",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "08:41",
+          "start": "07:00"
+        }
+      ],
+      "date": "2026-11-14",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "16:30"
+        }
+      ],
+      "date": "2026-11-15",
+      "reserve": false
     },
     {
       "busy": [],
-      "date": "2026-10-26",
+      "date": "2026-11-16",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "16:00"
+        }
+      ],
+      "date": "2026-11-17",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "08:37"
+        }
+      ],
+      "date": "2026-11-18",
+      "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "07:00"
+        }
+      ],
+      "date": "2026-11-19",
       "reserve": false
     }
   ],
-  "generated_at": "2026-09-30T01:05:38+00:00",
+  "generated_at": "2026-10-23T18:40:32+00:00",
   "teaching_window": {
     "end": "19:00",
     "start": "07:00"
