@@ -5,11 +5,6 @@
   },
   "days": [
     {
-      "busy": [],
-      "date": "2026-10-29",
-      "reserve": false
-    },
-    {
       "busy": [
         {
           "end": "19:00",
@@ -263,9 +258,19 @@
       ],
       "date": "2026-11-25",
       "reserve": false
+    },
+    {
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "07:00"
+        }
+      ],
+      "date": "2026-11-26",
+      "reserve": false
     }
   ],
-  "generated_at": "2026-10-30T04:43:06+00:00",
+  "generated_at": "2026-10-30T07:00:36+00:00",
   "teaching_window": {
     "end": "19:00",
     "start": "07:00"
