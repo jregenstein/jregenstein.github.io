@@ -10,7 +10,12 @@
       "reserve": false
     },
     {
-      "busy": [],
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "15:00"
+        }
+      ],
       "date": "2026-11-01",
       "reserve": false
     },
@@ -47,7 +52,7 @@
     {
       "busy": [
         {
-          "end": "14:33",
+          "end": "18:30",
           "start": "07:00"
         }
       ],
@@ -55,12 +60,22 @@
       "reserve": false
     },
     {
-      "busy": [],
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "07:00"
+        }
+      ],
       "date": "2026-11-06",
       "reserve": false
     },
     {
-      "busy": [],
+      "busy": [
+        {
+          "end": "17:00",
+          "start": "12:00"
+        }
+      ],
       "date": "2026-11-07",
       "reserve": false
     },
@@ -70,12 +85,22 @@
       "reserve": false
     },
     {
-      "busy": [],
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "18:00"
+        }
+      ],
       "date": "2026-11-09",
       "reserve": false
     },
     {
-      "busy": [],
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "16:00"
+        }
+      ],
       "date": "2026-11-10",
       "reserve": false
     },
@@ -120,7 +145,12 @@
       "reserve": false
     },
     {
-      "busy": [],
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "16:30"
+        }
+      ],
       "date": "2026-11-15",
       "reserve": false
     },
@@ -130,7 +160,12 @@
       "reserve": false
     },
     {
-      "busy": [],
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "16:00"
+        }
+      ],
       "date": "2026-11-17",
       "reserve": false
     },
@@ -175,17 +210,32 @@
       "reserve": false
     },
     {
-      "busy": [],
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "07:00"
+        }
+      ],
       "date": "2026-11-22",
       "reserve": false
     },
     {
-      "busy": [],
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "07:00"
+        }
+      ],
       "date": "2026-11-23",
       "reserve": false
     },
     {
-      "busy": [],
+      "busy": [
+        {
+          "end": "19:00",
+          "start": "13:30"
+        }
+      ],
       "date": "2026-11-24",
       "reserve": false
     },
@@ -220,7 +270,7 @@
       "reserve": false
     }
   ],
-  "generated_at": "2026-10-31T20:48:17+00:00",
+  "generated_at": "2026-10-31T20:52:39+00:00",
   "teaching_window": {
     "end": "19:00",
     "start": "07:00"
