@@ -12,7 +12,7 @@
     {
       "busy": [
         {
-          "end": "18:00",
+          "end": "19:00",
           "start": "13:00"
         }
       ],
@@ -260,7 +260,7 @@
       "reserve": false
     }
   ],
-  "generated_at": "2026-11-07T05:33:36+00:00",
+  "generated_at": "2026-11-07T07:45:37+00:00",
   "teaching_window": {
     "end": "19:00",
     "start": "07:00"
