@@ -97,7 +97,7 @@
         }
       ],
       "date": "2026-12-01",
-      "reserve": false
+      "reserve": true
     },
     {
       "busy": [
@@ -107,12 +107,12 @@
         }
       ],
       "date": "2026-12-02",
-      "reserve": false
+      "reserve": true
     },
     {
       "busy": [],
       "date": "2026-12-03",
-      "reserve": false
+      "reserve": true
     },
     {
       "busy": [
@@ -137,7 +137,7 @@
     {
       "busy": [],
       "date": "2026-12-06",
-      "reserve": false
+      "reserve": true
     },
     {
       "busy": [
@@ -147,7 +147,7 @@
         }
       ],
       "date": "2026-12-07",
-      "reserve": false
+      "reserve": true
     },
     {
       "busy": [
@@ -157,7 +157,7 @@
         }
       ],
       "date": "2026-12-08",
-      "reserve": false
+      "reserve": true
     },
     {
       "busy": [
@@ -227,12 +227,12 @@
         }
       ],
       "date": "2026-12-16",
-      "reserve": false
+      "reserve": true
     },
     {
       "busy": [],
       "date": "2026-12-17",
-      "reserve": false
+      "reserve": true
     },
     {
       "busy": [
@@ -242,15 +242,15 @@
         }
       ],
       "date": "2026-12-18",
-      "reserve": false
+      "reserve": true
     },
     {
       "busy": [],
       "date": "2026-12-19",
-      "reserve": false
+      "reserve": true
     }
   ],
-  "generated_at": "2026-11-22T08:01:01+00:00",
+  "generated_at": "2026-11-23T04:32:03+00:00",
   "teaching_window": {
     "end": "19:00",
     "start": "07:00"
