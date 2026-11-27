@@ -11,16 +11,6 @@
           "start": "07:00"
         }
       ],
-      "date": "2026-11-26",
-      "reserve": false
-    },
-    {
-      "busy": [
-        {
-          "end": "19:00",
-          "start": "07:00"
-        }
-      ],
       "date": "2026-11-27",
       "reserve": false
     },
@@ -238,9 +228,14 @@
       ],
       "date": "2026-12-23",
       "reserve": true
+    },
+    {
+      "busy": [],
+      "date": "2026-12-24",
+      "reserve": true
     }
   ],
-  "generated_at": "2026-11-27T04:37:36+00:00",
+  "generated_at": "2026-11-27T08:03:36+00:00",
   "teaching_window": {
     "end": "19:00",
     "start": "07:00"
